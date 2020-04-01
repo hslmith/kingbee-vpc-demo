@@ -126,7 +126,7 @@ resource "ibm_is_instance" "web-instancez01" {
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
-  user_data = "${file("kingweb-A.conf")}"
+  user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
 }
 
 
@@ -170,5 +170,5 @@ resource "ibm_is_instance" "web-instancez02" {
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone2}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
-  user_data = "${file("kingweb-B.conf")}"
+  user_data = "${data.template_cloudinit_config.cloud-init-web-b.rendered}"
 }
