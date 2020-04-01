@@ -119,7 +119,7 @@ resource "ibm_is_subnet" "websubnet1" {
 
 resource "ibm_is_instance" "web-instancez01" {
   count   = "${var.web_server_count}"
-  name    = "webz01-${count.index+1}"
+  name    = "web-kb01-${count.index+1}"
   image   = "${var.image}"
   profile = "${var.profile}"
 
@@ -163,7 +163,7 @@ resource "ibm_is_subnet" "websubnet2" {
 
 resource "ibm_is_instance" "web-instancez02" {
   count   = "${var.web_server_count}"
-  name    = "webz02-${count.index+1}"
+  name    = "web-kb02-${count.index+1}"
   image   = "${var.image}"
   profile = "${var.profile}"
 
