@@ -7,14 +7,14 @@ resource "ibm_is_network_acl" "default_acl" {
       action      = "deny"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
-      direction   = "ingress"
+      direction   = "inbound"
     },
     {
       name        = "${var.vpc_name}-default-deny-all-egress"
       action      = "deny"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
-      direction   = "egress"
+      direction   = "outbound"
     },
   ]
 }
@@ -25,7 +25,7 @@ resource "ibm_is_network_acl" "webapptier_acl" {
   rules = [
     {
       name      = "${var.vpc_name}-webapptier-icmp-all"
-      direction = "ingress"
+      direction = "inbound"
       action    = "allow"
       source    = "0.0.0.0/0"
 
@@ -38,14 +38,14 @@ resource "ibm_is_network_acl" "webapptier_acl" {
     },
     {
       name        = "${var.vpc_name}-webapptier-within-vpc"
-      direction   = "ingress"
+      direction   = "inbound"
       action      = "allow"
       source      = "${var.address-prefix-vpc}"
       destination = "${var.address-prefix-vpc}"
     },
     {
       name        = "${var.vpc_name}-webapptier-web-http-traffic"
-      direction   = "ingress"
+      direction   = "inbound"
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "${var.address-prefix-vpc}"
@@ -60,7 +60,7 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
-      direction   = "egress"
+      direction   = "outbound"
     },
   ]
 }
