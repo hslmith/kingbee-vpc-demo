@@ -29,11 +29,6 @@ variable "vpc_name" {
 }
 
 
-variable "cis_resource_group" {
-  default = "default"
-}
-
-
 variable "resource_group" {
   default = "kingbee-iaas-demo"
 }
