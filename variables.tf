@@ -34,6 +34,11 @@ variable "cis_resource_group" {
 }
 
 
+variable "resource_group" {
+  default = "kingbee-iaas-demo"
+}
+
+
 ////////////////
 // Define CIDR
 ////////////////
