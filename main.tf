@@ -1,3 +1,6 @@
+///Dual Zone vpc demo
+
+
 ////////////////
 //SSH Key 
 ////////////////
@@ -14,15 +17,12 @@ data "ibm_is_ssh_key" "sshkey1" {
 resource "ibm_is_vpc" "vpc1" {
   name = "${var.vpc_name}"
   address_prefix_management = "manual"
+  resource_group = "${var.resource_group}"
 }
 
 ////////////////
 //Create VPC CIDR and Zone Prefixes
 ///////////////
-
-
-
-
 
 
 
@@ -35,15 +35,7 @@ resource "ibm_is_security_group" "public_facing_sg" {
     vpc  = "${ibm_is_vpc.vpc1.id}"
 }
 
-resource "ibm_is_security_group_rule" "public_facing_tcp22" {
-    group = "${ibm_is_security_group.public_facing_sg.id}"
-    direction = "inbound"
-    remote = "0.0.0.0/0"
-    tcp = {
-      port_min = "22"
-      port_max = "22"
-    }
-}
+
 
 resource "ibm_is_security_group_rule" "public_facing_sg_tcp80" {
     group = "${ibm_is_security_group.public_facing_sg.id}"
@@ -115,22 +107,13 @@ resource "ibm_is_vpc_address_prefix" "prefix_z1" {
   cidr = "${var.zone1_prefix}"
 }
 
-//--- subnets for web and db tier
+//--- subnets 
 
 resource "ibm_is_subnet" "websubnet1" {
   name            = "web-subnet-zone1"
   vpc             = "${ibm_is_vpc.vpc1.id}"
   zone            = "${var.zone1}"
   ipv4_cidr_block = "${var.web_subnet_zone1}"
-  depends_on      = ["ibm_is_vpc_address_prefix.prefix_z1"]
-}
-
-
-resource "ibm_is_subnet" "dbsubnet1" {
-  name            = "db-subnet-zone1"
-  vpc             = "${ibm_is_vpc.vpc1.id}"
-  zone            = "${var.zone1}"
-  ipv4_cidr_block = "${var.db_subnet_zone1}"
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z1"]
 }
 
@@ -150,26 +133,49 @@ resource "ibm_is_instance" "web-instancez01" {
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
-  //user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
+  user_data = "${file("kingweb-A.conf")}"
+}
+
+
+/////////////////////
+//   ZONE 2 (RIGHT)
+/////////////////////
+
+//--- address prexix for VPC
+
+resource "ibm_is_vpc_address_prefix" "prefix_z2" {
+  name = "vpc-zone2-cidr"
+  zone = "${var.zone1}"
+  vpc  = "${ibm_is_vpc.vpc1.id}"
+  cidr = "${var.zone2_prefix}"
+}
+
+//--- subnets 
+
+resource "ibm_is_subnet" "websubnet2" {
+  name            = "web-subnet-zone2"
+  vpc             = "${ibm_is_vpc.vpc1.id}"
+  zone            = "${var.zone2}"
+  ipv4_cidr_block = "${var.web_subnet_zone2}"
+  depends_on      = ["ibm_is_vpc_address_prefix.prefix_z2"]
 }
 
 
 
-//--- DB Server(s) 
+//--- Web Server(s)
 
-
-resource "ibm_is_instance" "db-instancez01" {
-  count   = "${var.db_server_count}"
-  name    = "dbz01-${count.index+1}"
+resource "ibm_is_instance" "web-instancez02" {
+  count   = "${var.web_server_count}"
+  name    = "webz02-${count.index+1}"
   image   = "${var.image}"
   profile = "${var.profile}"
 
   primary_network_interface = {
-    subnet = "${ibm_is_subnet.dbsubnet1.id}"
-    security_groups = ["${ibm_is_security_group.private_facing_sg.id}"]
+    subnet = "${ibm_is_subnet.websubnet2.id}"
+    security_groups = ["${ibm_is_security_group.public_facing_sg.id}"]
   }
   vpc  = "${ibm_is_vpc.vpc1.id}"
-  zone = "${var.zone1}"
+  zone = "${var.zone2}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
-  //user_data = "${data.template_cloudinit_config.cloud-init-apptier.rendered}"
+  user_data = "${file("kingweb-B.conf")}"
 }
