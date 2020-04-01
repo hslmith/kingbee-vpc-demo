@@ -37,30 +37,6 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       destination = "0.0.0.0/0"
     },
     {
-      name        = "${var.vpc_name}-webapptier-udp-user-ports"
-      direction   = "ingress"
-      action      = "allow"
-      source      = "0.0.0.0/0"
-      destination = "0.0.0.0/0"
-
-      udp = {
-        port_min = "1024"
-        port_max = "65535"
-      }
-    },
-    {
-      name        = "${var.vpc_name}-webapptier-tcp-user-ports"
-      direction   = "ingress"
-      action      = "allow"
-      source      = "0.0.0.0/0"
-      destination = "0.0.0.0/0"
-
-      tcp = {
-        port_min = "1024"
-        port_max = "65535"
-      }
-    },
-    {
       name        = "${var.vpc_name}-webapptier-within-vpc"
       direction   = "ingress"
       action      = "allow"
@@ -81,31 +57,6 @@ resource "ibm_is_network_acl" "webapptier_acl" {
     },
     {
       name        = "${var.vpc_name}-webapptier-allow-all-egress"
-      action      = "allow"
-      source      = "0.0.0.0/0"
-      destination = "0.0.0.0/0"
-      direction   = "egress"
-    },
-  ]
-}
-
-/////////////////////
-Edit for transit gateway
-////////////////////
-
-resource "ibm_is_network_acl" "vpn_acl" {
-  name = "${var.vpc_name}-vpn-acl"
-
-  rules = [
-    {
-      name        = "${var.vpc_name}-vpn-all-ingress"
-      action      = "allow"
-      source      = "0.0.0.0/0"
-      destination = "0.0.0.0/0"
-      direction   = "ingress"
-    },
-    {
-      name        = "${var.vpc_name}-vpn-allow-all-egress"
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
