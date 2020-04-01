@@ -39,6 +39,10 @@ variable "resource_group" {
 ////////////////
 
 
+variable "address-prefix-vpc" {
+  default = "172.21.0.0/20"
+}
+
 variable "zone1_prefix" {
   default = "172.31.0.0/21"
   description = "CIDR block to be used for zone 1"
