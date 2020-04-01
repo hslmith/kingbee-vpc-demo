@@ -61,13 +61,6 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       }
     },
     {
-      name        = "${var.vpc_name}-webapptier-from-vpn-network"
-      direction   = "ingress"
-      action      = "allow"
-      source      = "${var.onprem_cidr}"
-      destination = "${var.address-prefix-vpc}"
-    },
-    {
       name        = "${var.vpc_name}-webapptier-within-vpc"
       direction   = "ingress"
       action      = "allow"
