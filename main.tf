@@ -110,7 +110,6 @@ resource "ibm_is_vpc_address_prefix" "prefix_z1" {
   cidr = "${var.zone1_prefix}"
 }
 
-
 //--- subnets 
 
 resource "ibm_is_subnet" "websubnet1" {
@@ -121,7 +120,7 @@ resource "ibm_is_subnet" "websubnet1" {
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z1"]
 }
 
-
+/*
 //--- Web Server(s)
 
 resource "ibm_is_instance" "web-instancez01" {
@@ -140,7 +139,7 @@ resource "ibm_is_instance" "web-instancez01" {
   resource_group = "${data.ibm_resource_group.resource.id}"
   user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
 }
-
+*/
 
 /////////////////////
 //   ZONE 2 (RIGHT)
@@ -166,7 +165,7 @@ resource "ibm_is_subnet" "websubnet2" {
 }
 
 
-
+/*
 //--- Web Server(s)
 
 resource "ibm_is_instance" "web-instancez02" {
@@ -186,4 +185,4 @@ resource "ibm_is_instance" "web-instancez02" {
   user_data = "${data.template_cloudinit_config.cloud-init-web-b.rendered}"
   //user_data = "${file("${path.module}/web_b.cfg")}"
 }
-
+*/
