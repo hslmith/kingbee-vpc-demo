@@ -80,13 +80,9 @@ variable "web_server_count" {
 }
 
 
-data "ibm_is_image" "c7_image" {
-    name = "centos-7.x-amd64"
-}
-
 variable "image" {
   default = "r006-e0039ab2-fcc8-11e9-8a36-6ffb6501dd33"  <-cent7
-  \\default = "r006-14140f94-fcc4-11e9-96e7-a72723715315" <-ubuntu18
+  //default = "r006-14140f94-fcc4-11e9-96e7-a72723715315" <-ubuntu18
   description = "OS Image ID to be used for virtual instances"
 }
 
