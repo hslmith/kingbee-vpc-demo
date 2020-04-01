@@ -180,5 +180,5 @@ resource "ibm_is_instance" "web-instancez02" {
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone2}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
-  user_data = "${file("web_b.cfg")}"
+  user_data = "${file("${path.module}/web_b.cfg")}"
 }
