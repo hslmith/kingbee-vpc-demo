@@ -1,16 +1,16 @@
 resource "ibm_is_network_acl" "default_acl" {
-  name = "${var.vpc-name}-default-acl"
+  name = "${var.vpc_name}-default-acl"
 
   rules = [
     {
-      name        = "${var.vpc-name}-default-deny-all-ingress"
+      name        = "${var.vpc_name}-default-deny-all-ingress"
       action      = "deny"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
       direction   = "ingress"
     },
     {
-      name        = "${var.vpc-name}-default-deny-all-egress"
+      name        = "${var.vpc_name}-default-deny-all-egress"
       action      = "deny"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
@@ -20,11 +20,11 @@ resource "ibm_is_network_acl" "default_acl" {
 }
 
 resource "ibm_is_network_acl" "webapptier_acl" {
-  name = "${var.vpc-name}-webapptier-acl"
+  name = "${var.vpc_name}-webapptier-acl"
 
   rules = [
     {
-      name      = "${var.vpc-name}-webapptier-icmp-all"
+      name      = "${var.vpc_name}-webapptier-icmp-all"
       direction = "ingress"
       action    = "allow"
       source    = "0.0.0.0/0"
@@ -37,7 +37,7 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       destination = "0.0.0.0/0"
     },
     {
-      name        = "${var.vpc-name}-webapptier-udp-user-ports"
+      name        = "${var.vpc_name}-webapptier-udp-user-ports"
       direction   = "ingress"
       action      = "allow"
       source      = "0.0.0.0/0"
@@ -49,7 +49,7 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       }
     },
     {
-      name        = "${var.vpc-name}-webapptier-tcp-user-ports"
+      name        = "${var.vpc_name}-webapptier-tcp-user-ports"
       direction   = "ingress"
       action      = "allow"
       source      = "0.0.0.0/0"
@@ -61,21 +61,21 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       }
     },
     {
-      name        = "${var.vpc-name}-webapptier-from-vpn-network"
+      name        = "${var.vpc_name}-webapptier-from-vpn-network"
       direction   = "ingress"
       action      = "allow"
       source      = "${var.onprem_cidr}"
       destination = "${var.address-prefix-vpc}"
     },
     {
-      name        = "${var.vpc-name}-webapptier-within-vpc"
+      name        = "${var.vpc_name}-webapptier-within-vpc"
       direction   = "ingress"
       action      = "allow"
       source      = "${var.address-prefix-vpc}"
       destination = "${var.address-prefix-vpc}"
     },
     {
-      name        = "${var.vpc-name}-webapptier-web-http-traffic"
+      name        = "${var.vpc_name}-webapptier-web-http-traffic"
       direction   = "ingress"
       action      = "allow"
       source      = "0.0.0.0/0"
@@ -87,7 +87,7 @@ resource "ibm_is_network_acl" "webapptier_acl" {
       }
     },
     {
-      name        = "${var.vpc-name}-webapptier-allow-all-egress"
+      name        = "${var.vpc_name}-webapptier-allow-all-egress"
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
@@ -101,18 +101,18 @@ Edit for transit gateway
 ////////////////////
 
 resource "ibm_is_network_acl" "vpn_acl" {
-  name = "${var.vpc-name}-vpn-acl"
+  name = "${var.vpc_name}-vpn-acl"
 
   rules = [
     {
-      name        = "${var.vpc-name}-vpn-all-ingress"
+      name        = "${var.vpc_name}-vpn-all-ingress"
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
       direction   = "ingress"
     },
     {
-      name        = "${var.vpc-name}-vpn-allow-all-egress"
+      name        = "${var.vpc_name}-vpn-allow-all-egress"
       action      = "allow"
       source      = "0.0.0.0/0"
       destination = "0.0.0.0/0"
