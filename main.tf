@@ -64,13 +64,6 @@ resource "ibm_is_security_group_rule" "public_facing_egress" {
 }
 
 
-//--- security group creation for db tier
-
-resource "ibm_is_security_group" "private_facing_sg" {
-    name = "${var.vpc_name}-private-facing-sg"
-    vpc = "${ibm_is_vpc.vpc1.id}"
-}
-
 
 
 
