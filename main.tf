@@ -110,6 +110,7 @@ resource "ibm_is_vpc_address_prefix" "prefix_z1" {
   cidr = "${var.zone1_prefix}"
 }
 
+/*
 //--- subnets 
 
 resource "ibm_is_subnet" "websubnet1" {
@@ -185,3 +186,4 @@ resource "ibm_is_instance" "web-instancez02" {
   user_data = "${data.template_cloudinit_config.cloud-init-web-b.rendered}"
   //user_data = "${file("${path.module}/web_b.cfg")}"
 }
+*/
