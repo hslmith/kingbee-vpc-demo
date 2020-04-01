@@ -17,7 +17,7 @@ data "ibm_is_ssh_key" "sshkey1" {
 resource "ibm_is_vpc" "vpc1" {
   name = "${var.vpc_name}"
   address_prefix_management = "manual"
-  resource_group = "${var.resource_group}"
+  resource_group = "${var.resource_group.id}"
 }
 
 ////////////////
