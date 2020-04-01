@@ -44,3 +44,12 @@ resource "ibm_is_lb_pool_member" "webtier-lb-pool-member-zone1" {
   port           = "80"
   target_address = "${element(ibm_is_instance.web-instancez01.*.primary_network_interface.0.primary_ipv4_address,count.index)}"
 }
+
+
+resource "ibm_is_lb_pool_member" "webtier-lb-pool-member-zone2" {
+  count          = "${ibm_is_instance.web-instancez02.count}"
+  lb             = "${ibm_is_lb.webtier-lb.id}"
+  pool           = "${element(split("/", ibm_is_lb_pool.webtier-lb-pool.id),1)}"
+  port           = "80"
+  target_address = "${element(ibm_is_instance.web-instancez02.*.primary_network_interface.0.primary_ipv4_address,count.index)}"
+}
