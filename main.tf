@@ -39,7 +39,15 @@ resource "ibm_is_security_group" "public_facing_sg" {
     vpc  = "${ibm_is_vpc.vpc1.id}"
 }
 
-
+resource "ibm_is_security_group_rule" "public_facing_tcp22" {
+    group = "${ibm_is_security_group.public_facing_sg.id}"
+    direction = "inbound"
+    remote = "0.0.0.0/0"
+    tcp = {
+      port_min = "22"
+      port_max = "22"
+    }
+}
 
 resource "ibm_is_security_group_rule" "public_facing_sg_tcp80" {
     group = "${ibm_is_security_group.public_facing_sg.id}"

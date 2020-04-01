@@ -5,7 +5,7 @@
 
 resource "ibm_is_lb" "webtier-lb" {
   name = "${var.vpc_name}-web-lb"
-  subnets = ["${ibm_is_subnet.websubnet1.id}", "${ibm_is_subnet.websubnet2.id}"]
+  subnets = ["${ibm_is_subnet.websubnet2.id}", "${ibm_is_subnet.websubnet1.id}"]
 }
 
 resource "ibm_is_lb_listener" "webtier-lb-listener" {
