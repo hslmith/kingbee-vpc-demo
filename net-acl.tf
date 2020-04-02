@@ -1,9 +1,9 @@
 resource "ibm_is_network_acl" "isWebServerACL" {
   name = "${var.vpc_name}-webserver-acl"
   vpc  = "${ibm_is_vpc.vpc1.id}"
-  
+
   rules {
-    name        = "outbound"
+    name        = "${var.vpc-name}-outbound-all"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "0.0.0.0/0"
@@ -16,7 +16,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     }
   }
   rules {
-    name        = "inbound"
+    name        = "${var.vpc-name}-inbound-web"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "${var.address-prefix-vpc}"
@@ -31,7 +31,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
 
 
     rules {
-    name        = "inbound"
+    name        = "${var.vpc-name}-inbound-ssh"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "${var.address-prefix-vpc}"
