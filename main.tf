@@ -144,8 +144,8 @@ resource "ibm_is_instance" "web-instancez01" {
   zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
-  //user_data = file("${path.module}/web_a.cfg")
+  //user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
+  user_data = "${data.local_file.cloud-config-web-left.content}"
 }
 
 
@@ -183,20 +183,22 @@ resource "ibm_is_subnet" "websubnet2" {
 
 //--- Web Server(s)
 
-resource "ibm_is_instance" "web-instancez02" {
+resource "ibm_is_instance" "web-instancez01" {
   count   = "${var.web_server_count}"
-  name    = "web-kb02-${count.index+1}"
+  name    = "web-kb01-${count.index+1}"
   image   = "${var.image}"
   profile = "${var.profile}"
 
   primary_network_interface = {
-    subnet = "${ibm_is_subnet.websubnet2.id}"
+    subnet = "${ibm_is_subnet.websubnet1.id}"
     security_groups = ["${ibm_is_security_group.public_facing_sg.id}"]
   }
   vpc  = "${ibm_is_vpc.vpc1.id}"
-  zone = "${var.zone2}"
+  zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  user_data = "${data.template_cloudinit_config.cloud-init-web-alt.rendered}"  
+  //user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
+  user_data = "${data.local_file.cloud-config-web-left.content}"
+  //user_data = file("${path.module}/web_a.cfg")
 }
 
