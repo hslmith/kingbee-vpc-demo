@@ -1,5 +1,5 @@
 resource "ibm_is_network_acl" "isWebServerACL" {
-  name = "${var.vpc_name}-WebServer-acl"
+  name = "${var.vpc_name}-sebserver-acl"
   rules {
     name        = "outbound"
     action      = "allow"
