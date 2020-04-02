@@ -116,6 +116,8 @@ resource "ibm_is_subnet" "websubnet1" {
   name            = "web-subnet-zone1"
   vpc             = "${ibm_is_vpc.vpc1.id}"
   zone            = "${var.zone1}"
+  network_acl     = "${ibm_is_network_acl.isWebServerACL.id}"
+  public_gateway  = "${ibm_is_public_gateway.pubgw-zone1.id}"
   ipv4_cidr_block = "${var.web_subnet_zone1}"
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z1"]
 }
@@ -161,6 +163,8 @@ resource "ibm_is_subnet" "websubnet2" {
   name            = "web-subnet-zone2"
   vpc             = "${ibm_is_vpc.vpc1.id}"
   zone            = "${var.zone2}"
+  network_acl     = "${ibm_is_network_acl.isWebServerACL.id}"
+  public_gateway  = "${ibm_is_public_gateway.pubgw-zone2.id}"
   ipv4_cidr_block = "${var.web_subnet_zone2}"
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z2"]
 }
