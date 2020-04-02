@@ -1,4 +1,4 @@
-data "template_cloudinit_config" "cloud-init-web-b" {
+data "template_cloudinit_config" "cloud-init-web-alt" {
   base64_encode = false
   gzip          = false
 
