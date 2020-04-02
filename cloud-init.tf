@@ -21,8 +21,7 @@ data "template_cloudinit_config" "cloud-init-left" {
     content       = "${data.local_file.cloud-config-web-left-txt.content}"
   }
 
-  }
-}
+
 
 data "template_cloudinit_config" "cloud-init-right" {
   gzip            = false
@@ -33,5 +32,4 @@ data "template_cloudinit_config" "cloud-init-right" {
     content       = "${data.local_file.cloud-config-web-right-txt.content}"
   }
 
-  }
-}
+  
