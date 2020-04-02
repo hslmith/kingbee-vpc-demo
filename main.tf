@@ -120,6 +120,11 @@ resource "ibm_is_subnet" "websubnet1" {
   public_gateway  = "${ibm_is_public_gateway.pubgw-zone1.id}"
   ipv4_cidr_block = "${var.web_subnet_zone1}"
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z1"]
+
+  provisioner "local-exec" {
+    command = "sleep 300"
+    when    = "destroy"
+  }
 }
 
 
@@ -167,6 +172,11 @@ resource "ibm_is_subnet" "websubnet2" {
   public_gateway  = "${ibm_is_public_gateway.pubgw-zone2.id}"
   ipv4_cidr_block = "${var.web_subnet_zone2}"
   depends_on      = ["ibm_is_vpc_address_prefix.prefix_z2"]
+
+  provisioner "local-exec" {
+    command = "sleep 300"
+    when    = "destroy"
+  }
 }
 
 
