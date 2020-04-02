@@ -137,8 +137,8 @@ resource "ibm_is_instance" "web-instancez01" {
   zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  //user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
-  user_data = file("${path.module}/web_a.cfg")
+  user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
+  //user_data = file("${path.module}/web_a.cfg")
 }
 
 
