@@ -30,8 +30,6 @@ resource "ibm_is_lb_pool" "webtier-lb-pool" {
 
 
 
-/*
-
 /////////////////////////////////////////
 // Add web from zone 1 and zone 2 to pool
 /////////////////////////////////////////
@@ -54,4 +52,3 @@ resource "ibm_is_lb_pool_member" "webtier-lb-pool-member-zone2" {
   target_address = "${element(ibm_is_instance.web-instancez02.*.primary_network_interface.0.primary_ipv4_address,count.index)}"
 }
 
-*/
