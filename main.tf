@@ -182,6 +182,6 @@ resource "ibm_is_instance" "web-instancez02" {
   zone = "${var.zone2}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
+  user_data = "${data.template_cloudinit_config.cloud-init-web-b.rendered}"
 }
 
