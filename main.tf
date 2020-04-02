@@ -137,7 +137,8 @@ resource "ibm_is_instance" "web-instancez01" {
   zone = "${var.zone1}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
+  //user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
+  user_data = file("${path.root}/web_a.cfg")
 }
 
 
@@ -182,13 +183,6 @@ resource "ibm_is_instance" "web-instancez02" {
   zone = "${var.zone2}"
   keys = ["${data.ibm_is_ssh_key.sshkey1.id}"]
   resource_group = "${data.ibm_resource_group.resource.id}"
-  //user_data = "${data.template_cloudinit_config.cloud-init-web-b.rendered}"
-  user_data = << EOF
-          #cloud-config
-          runcmd:
-          - yum install -y httpd
-          - echo "<html><head><title>How will selling VPC help you?</title></head><body><h1>Because...<p><img src='http://www.quickmeme.com/img/fa/fab021a8b7f181cf8543abd455227b03344c5de74cb991b4864d1643177429f9.jpg' alt='awesomecorgi'></h1></body></html>" > /var/www/html/index.html
-          - httpd -k start
-EOF
+  user_data = "${data.template_cloudinit_config.cloud-init-web-a.rendered}"
 }
 
