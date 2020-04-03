@@ -16,32 +16,17 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     }
   }
   rules {
-    name        = "${var.vpc_name}-inbound-web"
+    name        = "${var.vpc_name}-inbound-all"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "${var.address-prefix-vpc}"
     direction   = "inbound"
     tcp {
-      port_max        = 80
-      port_min        = 80
+      port_max        = 65535
+      port_min        = 1
       source_port_max = 60000
       source_port_min = 22
     }
   }
 
-
-    rules {
-    name        = "${var.vpc_name}-inbound-ssh"
-    action      = "allow"
-    source      = "0.0.0.0/0"
-    destination = "${var.address-prefix-vpc}"
-    direction   = "inbound"
-    tcp {
-      port_max        = 22
-      port_min        = 22
-      source_port_max = 60000
-      source_port_min = 22
-    }
-
-  }
 }
