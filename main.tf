@@ -88,12 +88,14 @@ resource "ibm_is_public_gateway" "pubgw-zone1" {
   name = "${var.vpc_name}-${var.zone1}-pubgw"
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone1}"
+  resource_group ="${data.ibm_resource_group.resource.id}"
 }
 
 resource "ibm_is_public_gateway" "pubgw-zone2" {
   name = "${var.vpc_name}-${var.zone2}-pubgw"
   vpc  = "${ibm_is_vpc.vpc1.id}"
   zone = "${var.zone2}"
+  resource_group = "${data.ibm_resource_group.resource.id}"
 }
 
 
