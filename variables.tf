@@ -24,7 +24,7 @@ variable "zone2" {
 ////////////////
 
 variable "vpc_name" {
-  default = "kingbee-vpc-demo"
+  default = "kingbee-vpc-demo-two"
   description = "Name of your VPC"
 }
 
