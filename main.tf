@@ -130,7 +130,7 @@ resource "ibm_is_subnet" "websubnet1" {
   }
 }
 
-/*
+
 //--- Web Server(s)
 
 resource "ibm_is_instance" "web-instancez01" {
@@ -150,7 +150,7 @@ resource "ibm_is_instance" "web-instancez01" {
   //user_data = "${data.template_cloudinit_config.cloud-init-web.rendered}"
   user_data = "${data.local_file.cloud-config-web-left-txt.content}"
 }
-*/
+
 
 /////////////////////
 //   ZONE 2 (RIGHT)
