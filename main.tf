@@ -182,7 +182,7 @@ resource "ibm_is_subnet" "websubnet2" {
   }
 }
 
-/*
+
 
 //--- Web Server(s)
 
@@ -204,4 +204,4 @@ resource "ibm_is_instance" "web-instancez02" {
   user_data = "${data.local_file.cloud-config-web-right-txt.content}"
   //user_data = file("${path.module}/web_a.cfg")
 }
-*/
+
