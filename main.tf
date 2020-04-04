@@ -133,7 +133,7 @@ resource "ibm_is_subnet" "websubnet1" {
 
 //--- Web Server(s)
 
-resource "ibm_is_instance" "web-instancezz01" {
+resource "ibm_is_instance" "web-instancez01" {
   count   = "${var.web_server_count}"
   name    = "web-kb01-${count.index+1}"
   image   = "${var.image}"
@@ -186,7 +186,7 @@ resource "ibm_is_subnet" "websubnet2" {
 
 //--- Web Server(s)
 
-resource "ibm_is_instance" "web-instancezz02" {
+resource "ibm_is_instance" "web-instancez02" {
   count   = "${var.web_server_count}"
   name    = "web-kb02-${count.index+1}"
   image   = "${var.image}"
