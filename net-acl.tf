@@ -58,20 +58,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
       source_port_min = 22
     }
   }
-  
-  rules {
-    name        = "${var.vpc_name}-inbound-tcp-all"
-    action      = "allow"
-    source      = "0.0.0.0/0"
-    destination = "${var.address-prefix-vpc}"
-    direction   = "inbound"
-    tcp {
-      port_max        = 65535
-      port_min        = 1
-      source_port_max = 60000
-      source_port_min = 22
-    }
-  }
+
     
     rules {
     name        = "${var.vpc_name}-outbound-icmp"
