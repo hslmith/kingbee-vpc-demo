@@ -67,8 +67,8 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     destination = "0.0.0.0/0"
     direction   = "outbound"
     icmp {
-     // code = ""
-      //type = ""
+      code = "0"
+      type = "0"
     }
   }
   
@@ -79,8 +79,8 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     destination = "0.0.0.0/0"
     direction   = "inbound"
     icmp {
-     // code = ""
-      //type = ""
+      code = "0"
+      type = "8"
     }
   }
   
