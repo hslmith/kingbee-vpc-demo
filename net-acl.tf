@@ -4,7 +4,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
 //  resource_group ="${data.ibm_resource_group.resource.id}"
 
   rules {
-    name        = "${var.vpc_name}-ooutbound-tcp-all"
+    name        = "${var.vpc_name}-outbound-tcp-all"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "0.0.0.0/0"
@@ -32,7 +32,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
   }
   
   rules {
-    name        = "${var.vpc_name}-iinbound-tcp-all"
+    name        = "${var.vpc_name}-inbound-tcp-all"
     action      = "allow"
     source      = "0.0.0.0/0"
     destination = "${var.address-prefix-vpc}"
