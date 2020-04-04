@@ -71,6 +71,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
       source_port_max = 60000
       source_port_min = 22
     }
+  }
     
     rules {
     name        = "${var.vpc_name}-outbound-icmp"
@@ -83,6 +84,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
       type = 8
     }
   }
+  
   rules {
     name        = "${var.vpc_name}-inbound-icmp"
     action      = "allow"
@@ -94,5 +96,5 @@ resource "ibm_is_network_acl" "isWebServerACL" {
       type = 8
     }
   }
-  }
+  
 }
