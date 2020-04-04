@@ -1,7 +1,7 @@
 resource "ibm_is_network_acl" "isWebServerACL" {
   name = "${var.vpc_name}-webserver-acl"
   vpc  = "${ibm_is_vpc.vpc1.id}"
-  resource_group ="${data.ibm_resource_group.resource.id}"
+//  resource_group ="${data.ibm_resource_group.resource.id}"
 
   rules {
     name        = "${var.vpc_name}-outbound-all"
