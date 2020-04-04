@@ -51,7 +51,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     source      = "0.0.0.0/0"
     destination = "${var.address-prefix-vpc}"
     direction   = "inbound"
-    tcp {
+    udp {
       port_max        = 65535
       port_min        = 1
       source_port_max = 60000
@@ -68,7 +68,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     direction   = "outbound"
     icmp {
       code = 0
-      type = 8
+      type = 0
     }
   }
   
@@ -80,7 +80,7 @@ resource "ibm_is_network_acl" "isWebServerACL" {
     direction   = "inbound"
     icmp {
       code = 0
-      type = 8
+      type = 0
     }
   }
   
