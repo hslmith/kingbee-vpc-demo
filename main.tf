@@ -35,7 +35,7 @@ resource "ibm_is_vpc" "vpc1" {
 
 
 resource "ibm_is_security_group" "public_facing_sg" {
-  name = "${var.vpc_name}-public-facing-sg1"
+  name = "${var.vpc_name}-public-facing-sg"
   vpc  = "${ibm_is_vpc.vpc1.id}"
   resource_group ="${data.ibm_resource_group.resource.id}"
 }
